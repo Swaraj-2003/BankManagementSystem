@@ -10,7 +10,6 @@ public class DriverApp {
     public static void registerCustomer(Bank b, String name, String password, long mobileNumber, String userName) {
         Customer c = new Customer(name, password, mobileNumber, userName);
         b.registerCustomer(c);
-        System.out.println(" You have Registered successfully, Please Log In now");
     }
 
     public static Customer login(Bank b, String userName, String password) {
@@ -129,7 +128,6 @@ public class DriverApp {
                                 break;
                             case 3:
                                 viewMyAccount(cust,b);
-
                                 break;
                             case 4:
                                 System.out.println("Enter a amount to deposit");

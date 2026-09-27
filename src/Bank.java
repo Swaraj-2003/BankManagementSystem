@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class Bank {
     public Bank() {
         account = new ArrayList<BankAccount>();
         cust = new ArrayList<Customer>();
+        getCutomersFromFile();
     }
 
     public void registerCustomer(Customer customer) {
@@ -21,6 +24,8 @@ public class Bank {
             }
         }
         cust.add(customer);
+        System.out.println(" You have Registered successfully, Please Log In now");
+        saveCustomersToFile(customer);
     }
 
     public Customer getCustomer(String userName) {
@@ -181,6 +186,43 @@ public class Bank {
             return;
         } else {
             System.out.println("Sorry ! You dont have any account");
+        }
+    }
+
+    public void saveCustomersToFile(Customer cust) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Swaraj\\eclipse-workspace\\BankManagementSystem\\Customer.txt",true));
+            bw.write(cust.getName()+"|");
+            bw.write(cust.getPassword()+"|");
+            bw.write(cust.getUserName()+"|");
+            bw.write(cust.getMobileNumber()+"|");
+            bw.newLine();
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error while saving customer details");
+        }
+    }
+
+    public void getCutomersFromFile(){
+        try(BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Swaraj\\eclipse-workspace\\BankManagementSystem\\Customer.txt"))) {
+            String line=br.readLine();
+            while(line!=null){
+                if(line.trim().isEmpty()) {
+                    line = br.readLine();
+                    continue;
+                }
+                String []str=line.split("\\|");
+                String name=str[0];
+                String password=str[1];
+                String username=str[2];
+                long mobileNumber=Long.parseLong(str[3]);
+                Customer c =new Customer(name,password,mobileNumber,username);
+                cust.add(c);
+                line= br.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error while retriving data from file");
         }
     }
 }

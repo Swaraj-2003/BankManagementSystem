@@ -74,9 +74,11 @@ public class BankAccount {
     }
 
     public void displayAccountDetails(){
-        System.out.println(accountHolderName);
-        System.out.println(accountNumber);
-        System.out.println(IFC_CODE);
-        System.out.println(bankBalance);
+        System.out.println("==============================");
+        System.out.println("Name           : "+accountHolderName);
+        System.out.println("Account Number : "+accountNumber);
+        System.out.println("IFC_CODE       : "+IFC_CODE);
+        System.out.println("Balance        : "+bankBalance);
+        System.out.println("==============================");
     }
 }
