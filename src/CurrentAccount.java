@@ -9,6 +9,10 @@ public class CurrentAccount extends BankAccount {
         super(accountHolderName, mobileNumber);
     }
 
+    public CurrentAccount(String accountHolderName, long accountNumber, long mobileNumber, long bankBalance) {
+        super(accountHolderName, mobileNumber,accountNumber,bankBalance);
+    }
+
     public void setOverDraftLimit(double overDraftLimit) {
         this.overDraftLimit = overDraftLimit;
     }
@@ -17,16 +21,16 @@ public class CurrentAccount extends BankAccount {
         return overDraftLimit;
     }
     @Override
-    public void withdraw(long money) {
+    public boolean withdraw(long money) {
         long bankBalance = getBankBalance();
         if(money<=0){
             System.out.println("please enter a valid amount");
-            return;
+            return false;
         }
         double limit=bankBalance+overDraftLimit;
         if(limit==0){
             System.out.println("Dear customer you have used your OverDraftLimit");
-            return;
+            return false;
         }
         if(money<=limit){
             updateBalance(-money);
@@ -34,14 +38,18 @@ public class CurrentAccount extends BankAccount {
         }
         else{
             System.out.println("Insufficient Bank Balance");
+            return false;
         }
+        return true;
     }
 
     public void displayAccountDetails(){
-        System.out.println(super.getAccountHolderName());
-        System.out.println(super.getAccountNumber());
-        System.out.println(IFC_CODE);
-        System.out.println(super.getBankBalance());
-        System.out.println(overDraftLimit);
+        System.out.println("==============================");
+        System.out.println("Name           : "+super.getAccountHolderName());
+        System.out.println("Account Number : "+super.getAccountNumber());
+        System.out.println("IFC_CODE       : "+IFC_CODE);
+        System.out.println("Balance        : "+super.getBankBalance());
+        System.out.println("OverDraftLimit : "+overDraftLimit);
+        System.out.println("==============================");
     }
 }

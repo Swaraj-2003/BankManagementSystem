@@ -9,6 +9,10 @@ public class SavingsAccount extends BankAccount {
         super(accountHolderName, mobileNumber);
     }
 
+    public SavingsAccount(String accountHolderName, long accountNumber, long mobileNumber, long bankBalance) {
+        super(accountHolderName, mobileNumber,accountNumber,bankBalance);
+    }
+
     public double getInterestRate() {
         return interestRate;
     }

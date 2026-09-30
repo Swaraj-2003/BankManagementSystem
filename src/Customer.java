@@ -44,9 +44,11 @@ public class Customer {
     }
 
     public  void displayCustomerDetails(){
+        System.out.println("===============================");
         System.out.println(this.name);
         System.out.println(this.mobileNumber);
         System.out.println(this.userName);
+        System.out.println("===============================");
     }
 
 }

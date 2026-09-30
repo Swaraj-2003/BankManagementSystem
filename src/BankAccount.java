@@ -13,6 +13,13 @@ public class BankAccount {
         this.mobileNumber = mobileNumber;
     }
 
+    public BankAccount(String accountHolderName, long mobileNumber, long accountNumber, long bankBalance) {
+        this.accountHolderName = accountHolderName;
+        this.mobileNumber = mobileNumber;
+        this.accountNumber=accountNumber;
+        this.bankBalance=bankBalance;
+    }
+
     protected  void updateBalance(long amount){
         bankBalance+=amount;
     }
@@ -55,18 +62,20 @@ public class BankAccount {
         System.out.println("Money deposited Successfuly");
     }
 
-    public void withdraw(long money){
+    public boolean withdraw(long money){
         if(money<=0){
             System.out.println("please enter a valid amount");
-            return;
+            return false;
         }
         if(bankBalance<money){
             System.out.println("Insufficient bank balance");
+            return false;
         }
         else{
             bankBalance-=money;
             System.out.println("Money withdraw Successfuly");
         }
+        return true;
     }
 
     public long checkBankBalance(){
